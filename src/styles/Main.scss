@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+@import url("https://fonts.googleapis.com/css?family=Playfair+Display");
+@import "./variables";
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", "Roboto", "Helvetica Neue", -apple-system,
+    BlinkMacSystemFont, "Droid Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+a {
+  text-decoration: none;
+  &:visited {
+    color: inherit;
+  }
+  &:link {
+    color: inherit;
+  }
+}
+
+li {
+  list-style-type: none;
+  cursor: pointer;
+}
+
+input {
+  border: 1px solid #e2e2e2;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px 0px;
+  padding-left: 10px;
+  font-size: 16px;
+  outline: none;
+}
+
+button {
+  width: fit-content;
+  background: black;
+  color: white;
+  padding: 5px 15px;
+  font-family: "Open Sans";
+  font-weight: 600;
+  font-size: 12px;
+  margin: 10px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  &:focus {
+    outline: 2px solid $light-grey;
+  }
+}
+
+i {
+  cursor: pointer;
+  font-size: 14px;
+  margin: 0px 10px;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
