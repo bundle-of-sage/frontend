@@ -1,9 +1,11 @@
-import config from "./config";
 import firebase from "firebase/app";
-import "firebase/auth";
+
+const config = {
+  projectId: "bundle-of-sage",
+  apiKey: process.env.REACT_APP_FBASE_WEB_KEY,
+  authDomain: process.env.REACT_APP_FBASE_DOMAIN,
+  databaseURL: "https://bundle-of-sage.firebaseio.com"
+};
 
 firebase.initializeApp(config);
-firebase.auth().useDeviceLanguage();
-
-export const auth = firebase.auth();
-export const googleProvider = new firebase.auth.GoogleAuthProvider();
+export default firebase;
