@@ -4,7 +4,7 @@ const client = axios.create({
   baseURL:
     process.env.NODE_ENV === "production"
       ? "https://api.bundleofsage.com"
-      : "http://localhost:5000/bundle-of-sage/us-central1/app/",
+      : "http://localhost:3017",
   withCredentials: true
 });
 
