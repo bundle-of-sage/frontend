@@ -14,5 +14,7 @@ export default {
     login: userInfo => client.post("/auth/login", { userInfo }),
     logout: () => client.get("/auth/logout")
   },
-  membership: {}
+  user: {
+    getUserProfile: () => client.get("/user")
+  }
 };

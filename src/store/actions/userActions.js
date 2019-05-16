@@ -7,9 +7,10 @@ export function login(payload) {
   };
 }
 
-export function logout(payload) {
-  return {
-    type: actionTypes.LOGOUT,
-    payload
-  };
+export function logout() {
+  return { type: actionTypes.LOGOUT };
+}
+
+export function getUserProfile() {
+  return { type: actionTypes.GET_USER_PROFILE };
 }
