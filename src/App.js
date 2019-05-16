@@ -11,23 +11,42 @@ export default class App extends Component {
   state = { checkingAuth: false, isAuthorized: false };
 
   async componentDidMount() {
-    this.setState({ checkingAuthentication: true });
+    this.setState({ checkingAuth: true });
     const { data } = await api.auth.checkStatus();
-    console.log("Response: ", data);
+    this.setState({
+      isAuthorized: data.authorized,
+      checkingAuth: false
+    });
   }
-
   render() {
-    return (
-      <Provider store={store}>
-        <Suspense fallback={<p>Loading...</p>}>
-          <Router>
-            <Switch>
-              <Route path="/" exact component={Auth} />
-              <Route path="/signup" component={SignUp} />
-            </Switch>
-          </Router>
-        </Suspense>
-      </Provider>
-    );
+    const { checkingAuth, isAuthorized } = this.state;
+    if (checkingAuth) return null;
+    else if (isAuthorized) {
+      return (
+        <Provider store={store}>
+          <Suspense fallback={<p>Loading...</p>}>
+            <Router>
+              <Switch>
+                <Route path="/" exact component={Auth} />
+                <Route path="/signup" component={SignUp} />
+              </Switch>
+            </Router>
+          </Suspense>
+        </Provider>
+      );
+    } else {
+      return (
+        <Provider store={store}>
+          <Suspense fallback={<p>Loading...</p>}>
+            <Router>
+              <Switch>
+                <Route path="/" exact component={Auth} />
+                <Route path="/signup" component={SignUp} />
+              </Switch>
+            </Router>
+          </Suspense>
+        </Provider>
+      );
+    }
   }
 }

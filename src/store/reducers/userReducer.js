@@ -2,17 +2,19 @@ import * as actionTypes from "../actions/actionTypes";
 import produce from "immer";
 
 const intialState = {
-  userId: null
+  user_id: null,
+  email: null,
+  first_name: null,
+  last_name: null,
+  profile_photo_url: null,
+  membership_paid: null
 };
 
 const userReducer = (state = intialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
       case actionTypes.LOGIN_COMPLETE:
-        draft.userId = 45;
-        console.log("state: ", state);
-        console.log("draft: ", draft.user_id);
-        break;
+        return { ...state, ...action.payload };
       default:
         return state;
     }
