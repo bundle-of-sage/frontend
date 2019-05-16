@@ -11,9 +11,8 @@ class Auth extends Component {
   googleLogin = async event => {
     event.preventDefault();
     let googleInfo = await auth.signInWithPopup(googleProvider);
-    const { user } = googleInfo;
-    const response = await api.auth.login(user);
-    console.log("response: ", response);
+    const { providerData } = googleInfo.user;
+    await this.props.login(providerData[0]);
   };
 
   render() {

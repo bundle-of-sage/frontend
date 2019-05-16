@@ -10,6 +10,8 @@ const userReducer = (state = intialState, action) => {
     switch (action.type) {
       case actionTypes.LOGIN_COMPLETE:
         draft.userId = 45;
+        console.log("state: ", state);
+        console.log("draft: ", draft.user_id);
         break;
       default:
         return state;
