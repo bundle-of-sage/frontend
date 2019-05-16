@@ -6,6 +6,7 @@ import api from "./api/api";
 
 let Auth = React.lazy(() => import("./views/Auth/Auth"));
 let SignUp = React.lazy(() => import("./views/SignUp/SignUp"));
+let Dashboard = React.lazy(() => import("./views/Dashboard/Dashboard"));
 
 export default class App extends Component {
   state = { checkingAuth: false, isAuthorized: false };
@@ -27,8 +28,7 @@ export default class App extends Component {
           <Suspense fallback={<p>Loading...</p>}>
             <Router>
               <Switch>
-                <Route path="/" exact component={Auth} />
-                <Route path="/signup" component={SignUp} />
+                <Route path="/" exact component={Dashboard} />
               </Switch>
             </Router>
           </Suspense>
