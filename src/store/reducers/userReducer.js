@@ -15,6 +15,10 @@ const userReducer = (state = intialState, action) => {
     switch (action.type) {
       case actionTypes.LOGIN_COMPLETE:
         return { ...state, ...action.payload };
+
+      case actionTypes.GET_USER_PROFILE_COMPLETE:
+        return { ...state, ...action.payload };
+
       default:
         return state;
     }

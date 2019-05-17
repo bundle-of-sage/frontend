@@ -1,3 +1,22 @@
+@import "../../styles/variables";
+
 .container {
-  background: lightblue;
+  background: $dark-orange;
+  height: 100vh;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paymentContainer {
+  background: $off-white;
+  color: black;
+  border-left: 5px solid $apricot;
+  border-bottom: 5px solid $apricot;
+  width: 30vw;
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

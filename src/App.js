@@ -9,20 +9,21 @@ let SignUp = React.lazy(() => import("./views/SignUp/SignUp"));
 let Dashboard = React.lazy(() => import("./views/Dashboard/Dashboard"));
 
 export default class App extends Component {
-  state = { checkingAuth: false, isAuthorized: false };
+  state = { checkingAuth: false, isAuthorized: false, activeMembership: false };
 
   async componentDidMount() {
     this.setState({ checkingAuth: true });
     const { data } = await api.auth.checkStatus();
     this.setState({
       isAuthorized: data.authorized,
+      activeMembership: data.activeMembership,
       checkingAuth: false
     });
   }
   render() {
-    const { checkingAuth, isAuthorized } = this.state;
+    const { checkingAuth, isAuthorized, activeMembership } = this.state;
     if (checkingAuth) return null;
-    else if (isAuthorized) {
+    else if (isAuthorized && activeMembership) {
       return (
         <Provider store={store}>
           <Suspense fallback={<p>Loading...</p>}>
@@ -40,8 +41,11 @@ export default class App extends Component {
           <Suspense fallback={<p>Loading...</p>}>
             <Router>
               <Switch>
-                <Route path="/" exact component={Auth} />
-                <Route path="/signup" component={SignUp} />
+                {isAuthorized ? (
+                  <Route path="/" exact component={SignUp} />
+                ) : (
+                  <Route path="/" exact component={Auth} />
+                )}
               </Switch>
             </Router>
           </Suspense>
