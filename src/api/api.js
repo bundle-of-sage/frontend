@@ -15,6 +15,7 @@ export default {
     logout: () => client.get("/auth/logout")
   },
   user: {
-    getUserProfile: () => client.get("/user")
+    getUserProfile: () => client.get("/user"),
+    chargePayment: token => client.post("/user/payment", { token })
   }
 };
