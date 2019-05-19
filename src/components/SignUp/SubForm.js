@@ -28,22 +28,37 @@ class SubForm extends Component {
   };
 
   render() {
-    const { loading, error, errorMessage } = this.state;
+    const { loading, error, errorMessage, success } = this.state;
     return (
       <>
-        <form>
-          <div className={classes.cardElementContainer}>
-            <CardSection />
-          </div>
+        {!success && (
+          <form>
+            <div className={classes.cardElementContainer}>
+              <CardSection />
+            </div>
 
-          <button type="button" onClick={this.handleSubmit}>
-            {loading ? (
-              <Spinner isLoading={loading} size={20} color="white" />
-            ) : (
-              "Sign Up"
-            )}
-          </button>
-        </form>
+            {error && <h5 className={classes.errorMessage}>{errorMessage}</h5>}
+
+            <button type="button" onClick={this.handleSubmit}>
+              {loading ? (
+                <Spinner isLoading={loading} size={20} color="white" />
+              ) : (
+                "Sign Up"
+              )}
+            </button>
+          </form>
+        )}
+        {success && (
+          <>
+            <h4 className={classes.successMessage}>
+              <i className="far fa-check-circle" />
+              Payment successful!
+            </h4>
+            <button type="button" onClick={() => console.log("Dashboard!")}>
+              Continue to Dashboard <i className="fas fa-angle-right" />
+            </button>
+          </>
+        )}
       </>
     );
   }

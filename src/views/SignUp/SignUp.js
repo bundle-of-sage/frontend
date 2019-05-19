@@ -11,7 +11,7 @@ export default class SignUp extends Component {
     return (
       <div className={classes.container}>
         <div className={classes.paymentContainer}>
-          <h3>Get Your Access to Bundle of Sage</h3>
+          <h3>Join Bundle of Sage</h3>
           <h6>$50 USD - MEMBERSHIP ACCESS</h6>
           <StripeProvider apiKey={REACT_APP_STRIPE_KEY}>
             <Elements fonts={fonts}>

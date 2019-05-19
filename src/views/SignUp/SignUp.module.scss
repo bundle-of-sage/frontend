@@ -14,7 +14,8 @@
   color: black;
   border-bottom: 5px solid $apricot;
   width: 30vw;
-  height: 30vh;
+  min-width: 250px;
+  padding: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
