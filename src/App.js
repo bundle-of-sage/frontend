@@ -43,14 +43,14 @@ class App extends Component {
     if (checkingAuth) return null;
     else if (isAuthorized && activeMembership) {
       return (
-        <>
+        <div style={{ display: "flex" }}>
           <Sidebar />
           <Router>
             <Switch>
               <Route path="/" exact component={Dashboard} />
             </Switch>
           </Router>
-        </>
+        </div>
       );
     } else {
       return (

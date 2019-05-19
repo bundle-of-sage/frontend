@@ -7,6 +7,7 @@ class Dashboard extends Component {
   async componentDidMount() {
     await this.props.getUserProfile();
   }
+
   render() {
     return <div className={classes.container}>Dashboard</div>;
   }
