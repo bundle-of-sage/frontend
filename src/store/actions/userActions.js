@@ -1,4 +1,4 @@
-import * as actionTypes from "../actions/actionTypes";
+import * as actionTypes from "./actionTypes";
 
 export function login(payload) {
   return {
@@ -13,4 +13,8 @@ export function logout() {
 
 export function getUserProfile() {
   return { type: actionTypes.GET_USER_PROFILE };
+}
+
+export function updatePaymentStatus() {
+  return { type: actionTypes.UPDATE_PAYMENT_STATUS };
 }

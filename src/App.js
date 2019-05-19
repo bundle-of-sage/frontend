@@ -14,7 +14,14 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.user.user_id !== this.props.user.user_id) {
+    const { user: newUser } = this.props;
+    const { user: prevUser } = prevProps;
+
+    if (prevUser.user_id !== newUser.user_id) {
+      //User logged in
+      this.updateAuthStatus();
+    } else if (prevUser.membership_paid !== newUser.membership_paid) {
+      //Successfully charged payment
       this.updateAuthStatus();
     }
   }

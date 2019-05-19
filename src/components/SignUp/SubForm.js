@@ -3,6 +3,8 @@ import classes from "./SubForm.module.scss";
 import { injectStripe } from "react-stripe-elements";
 import CardSection from "./CardSection";
 import api from "../../api/api";
+import { connect } from "react-redux";
+import { updatePaymentStatus } from "../../store/actions/userActions";
 import Spinner from "../Layout/Spinner";
 
 class SubForm extends Component {
@@ -23,7 +25,7 @@ class SubForm extends Component {
       await api.user.chargePayment({ token: token.id });
       //On success, show success UI
       await this.setState({ loading: false, success: true });
-      //Clear Out Form
+      //Clear Form
     } catch (error) {
       //On error, show error UI
       const errorMessage =
@@ -34,8 +36,9 @@ class SubForm extends Component {
   };
 
   handleDashboardClick = () => {
-    this.props.history.push("/");
+    this.props.updatePaymentStatus();
   };
+
   render() {
     const { loading, error, errorMessage, success } = this.state;
     return (
@@ -73,4 +76,7 @@ class SubForm extends Component {
   }
 }
 
-export default injectStripe(SubForm);
+export default connect(
+  null,
+  { updatePaymentStatus }
+)(injectStripe(SubForm));

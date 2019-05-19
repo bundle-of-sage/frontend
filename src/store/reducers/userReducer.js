@@ -19,6 +19,9 @@ const userReducer = (state = intialState, action) => {
       case actionTypes.GET_USER_PROFILE_COMPLETE:
         return { ...state, ...action.payload };
 
+      case actionTypes.UPDATE_PAYMENT_STATUS:
+        draft.membership_paid = true;
+        break;
       default:
         return state;
     }
