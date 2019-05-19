@@ -35,7 +35,6 @@ class SubForm extends Component {
 
   handleDashboardClick = () => {
     this.props.history.push("/");
-    this.props.updateAuthStatus();
   };
   render() {
     const { loading, error, errorMessage, success } = this.state;

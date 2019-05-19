@@ -15,10 +15,7 @@ export default class SignUp extends Component {
           <h6>$50 USD - MEMBERSHIP ACCESS</h6>
           <StripeProvider apiKey={REACT_APP_STRIPE_KEY}>
             <Elements fonts={fonts}>
-              <InjectedSubForm
-                {...this.props}
-                updateAuthStatus={this.props.updateAuthStatus}
-              />
+              <InjectedSubForm {...this.props} />
             </Elements>
           </StripeProvider>
         </div>

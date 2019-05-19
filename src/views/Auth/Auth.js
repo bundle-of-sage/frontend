@@ -9,8 +9,7 @@ class Auth extends Component {
     email: "",
     password: "",
     verifyPassword: "",
-    loading: false,
-    toSignUp: false
+    loading: false
   };
 
   googleLogin = async event => {
@@ -18,7 +17,6 @@ class Auth extends Component {
     const { user } = await auth.signInWithPopup(googleProvider);
     const { displayName, email, photoURL, uid } = user;
     await this.props.login({ displayName, email, photoURL, uid });
-    this.props.updateAuthStatus();
   };
 
   render() {
