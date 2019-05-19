@@ -5,13 +5,13 @@ import { connect } from "react-redux";
 import { login } from "../../store/actions/userActions";
 
 class Auth extends Component {
-  state = { email: "", password: "", verifyPassword: "" };
+  state = { email: "", password: "", verifyPassword: "", loading: false };
 
   googleLogin = async event => {
     event.preventDefault();
-    let googleInfo = await auth.signInWithPopup(googleProvider);
-    const { providerData } = googleInfo.user;
-    await this.props.login(providerData[0]);
+    const { user } = await auth.signInWithPopup(googleProvider);
+    const { displayName, email, photoURL, uid } = user;
+    await this.props.login({ displayName, email, photoURL, uid });
   };
 
   render() {
