@@ -6,7 +6,12 @@ import api from "../../api/api";
 import Spinner from "../Layout/Spinner";
 
 class SubForm extends Component {
-  state = { loading: false, error: false, errorMessage: null, success: false };
+  state = {
+    loading: false,
+    error: false,
+    errorMessage: null,
+    success: false
+  };
 
   handleSubmit = async ev => {
     ev.preventDefault();
@@ -18,6 +23,7 @@ class SubForm extends Component {
       await api.user.chargePayment({ token: token.id });
       //On success, show success UI
       await this.setState({ loading: false, success: true });
+      //Clear Out Form
     } catch (error) {
       //On error, show error UI
       const errorMessage =
@@ -27,6 +33,10 @@ class SubForm extends Component {
     }
   };
 
+  handleDashboardClick = () => {
+    this.props.history.push("/");
+    this.props.updateAuthStatus();
+  };
   render() {
     const { loading, error, errorMessage, success } = this.state;
     return (
@@ -54,7 +64,7 @@ class SubForm extends Component {
               <i className="far fa-check-circle" />
               Payment successful!
             </h4>
-            <button type="button" onClick={() => console.log("Dashboard!")}>
+            <button type="button" onClick={this.handleDashboardClick}>
               Continue to Dashboard <i className="fas fa-angle-right" />
             </button>
           </>

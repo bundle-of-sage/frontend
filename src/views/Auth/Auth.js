@@ -3,15 +3,23 @@ import classes from "./Auth.module.scss";
 import { auth, googleProvider } from "../../firebase/auth";
 import { connect } from "react-redux";
 import { login } from "../../store/actions/userActions";
+import { Redirect } from "react-router";
 
 class Auth extends Component {
-  state = { email: "", password: "", verifyPassword: "", loading: false };
+  state = {
+    email: "",
+    password: "",
+    verifyPassword: "",
+    loading: false,
+    toSignUp: false
+  };
 
   googleLogin = async event => {
     event.preventDefault();
     const { user } = await auth.signInWithPopup(googleProvider);
     const { displayName, email, photoURL, uid } = user;
     await this.props.login({ displayName, email, photoURL, uid });
+    this.props.updateAuthStatus();
   };
 
   render() {
