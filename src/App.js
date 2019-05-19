@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import classes from "./App.module.scss";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import api from "./api/api";
 import Auth from "./views/Auth/Auth";
 import SignUp from "./views/SignUp/SignUp";
 import Dashboard from "./views/Dashboard/Dashboard";
 import Sidebar from "./components/Layout/Sidebar/Sidebar";
+import MobileBar from "./components/Layout/MobileBar/MobileBar";
 import { connect } from "react-redux";
 
 class App extends Component {
@@ -43,8 +45,9 @@ class App extends Component {
     if (checkingAuth) return null;
     else if (isAuthorized && activeMembership) {
       return (
-        <div style={{ display: "flex" }}>
+        <div className={classes.appContainer}>
           <Sidebar />
+          <MobileBar />
           <Router>
             <Switch>
               <Route path="/" exact component={Dashboard} />
