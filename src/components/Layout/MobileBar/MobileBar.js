@@ -3,7 +3,7 @@ import classes from "./MobileBar.module.scss";
 import Sidebar from "./Sidebar/Sidebar";
 
 export default class MobileBar extends Component {
-  state = { visible: true };
+  state = { visible: false };
   toggleSidebar = () => {
     this.setState(state => {
       return { visible: !state.visible };
@@ -12,15 +12,13 @@ export default class MobileBar extends Component {
   render() {
     const { visible } = this.state;
     return (
-      <>
+      <div className={classes.outerContainer}>
         <div className={classes.container}>
           <h1>Bundle of Sage</h1>
-          {!visible && (
-            <i className="fas fa-equals" onClick={this.toggleSidebar} />
-          )}
+          <i className="fas fa-equals" onClick={this.toggleSidebar} />
         </div>
         {visible && <Sidebar />}
-      </>
+      </div>
     );
   }
 }

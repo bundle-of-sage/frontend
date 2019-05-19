@@ -4,8 +4,14 @@ import classes from "./Sidebar.module.scss";
 export default function Sidebar() {
   return (
     <>
-      <div className={classes.sidebarShadow} />
-      <div className={classes.sidebar}>Sidebar Content</div>;
+      <div className={classes.shadow} />
+      <div className={classes.sidebar}>
+        <p>Menu Item</p>
+        <p>Menu Item</p>
+        <p>Menu Item</p>
+        <p>Menu Item</p>
+      </div>
+      ;
     </>
   );
 }
