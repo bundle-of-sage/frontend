@@ -1,8 +1,24 @@
 import React, { Component } from "react";
 import classes from "./Sidebar.module.scss";
+import { connect } from "react-redux";
 
-export default class Sidebar extends Component {
+class Sidebar extends Component {
   render() {
-    return <div className={classes.container}>Sidebar</div>;
+    const { photoUrl } = this.props;
+    return (
+      <div className={classes.container}>
+        <h1 className={classes.logoText}>
+          {photoUrl && (
+            <img src={photoUrl} className={classes.avatar} alt="profile" />
+          )}
+          Bundle of Sage
+        </h1>
+      </div>
+    );
   }
 }
+
+function mapStateToProps(state) {
+  return { photoUrl: state.user.profile_photo_url };
+}
+export default connect(mapStateToProps)(Sidebar);

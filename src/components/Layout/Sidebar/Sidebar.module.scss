@@ -5,4 +5,20 @@
   width: 15vw;
   min-width: 200px;
   height: 100vh;
+  padding-left: 20px;
+}
+
+.logoText {
+  font-family: "Philosopher";
+  margin-top: 20px;
+  color: $dark-orange;
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  margin-right: 10px;
 }
