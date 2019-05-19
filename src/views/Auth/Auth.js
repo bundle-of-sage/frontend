@@ -3,7 +3,6 @@ import classes from "./Auth.module.scss";
 import { auth, googleProvider } from "../../firebase/auth";
 import { connect } from "react-redux";
 import { login } from "../../store/actions/userActions";
-import { Redirect } from "react-router";
 
 class Auth extends Component {
   state = {
