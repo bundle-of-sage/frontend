@@ -4,6 +4,7 @@ import api from "./api/api";
 import Auth from "./views/Auth/Auth";
 import SignUp from "./views/SignUp/SignUp";
 import Dashboard from "./views/Dashboard/Dashboard";
+import Sidebar from "./components/Layout/Sidebar/Sidebar";
 import { connect } from "react-redux";
 
 class App extends Component {
@@ -16,13 +17,14 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { user: newUser } = this.props;
     const { user: prevUser } = prevProps;
-
+    const { isAuthorized, activeMembership } = this.state;
+    if (isAuthorized && activeMembership) return;
     if (prevUser.user_id !== newUser.user_id) {
       //User logged in
-      this.updateAuthStatus();
+      return this.updateAuthStatus();
     } else if (prevUser.membership_paid !== newUser.membership_paid) {
       //Successfully charged payment
-      this.updateAuthStatus();
+      return this.updateAuthStatus();
     }
   }
 
@@ -41,11 +43,14 @@ class App extends Component {
     if (checkingAuth) return null;
     else if (isAuthorized && activeMembership) {
       return (
-        <Router>
-          <Switch>
-            <Route path="/" exact component={Dashboard} />
-          </Switch>
-        </Router>
+        <>
+          <Sidebar />
+          <Router>
+            <Switch>
+              <Route path="/" exact component={Dashboard} />
+            </Switch>
+          </Router>
+        </>
       );
     } else {
       return (

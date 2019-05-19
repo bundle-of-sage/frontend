@@ -22,6 +22,7 @@ const userReducer = (state = intialState, action) => {
       case actionTypes.UPDATE_PAYMENT_STATUS:
         draft.membership_paid = true;
         break;
+
       default:
         return state;
     }
