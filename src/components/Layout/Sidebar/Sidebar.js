@@ -7,12 +7,17 @@ class Sidebar extends Component {
     const { photoUrl } = this.props;
     return (
       <div className={classes.container}>
-        <h1 className={classes.logoText}>
-          {photoUrl && (
-            <img src={photoUrl} className={classes.avatar} alt="profile" />
-          )}
-          Bundle of Sage
-        </h1>
+        <h1 className={classes.logoText}>Bundle of Sage</h1>
+        <nav className={classes.navbar}>
+          <p>Dashboard</p>
+          <p>Prompts</p>
+          <p>SEO</p>
+          <p>Business</p>
+          <p>Session Experience</p>
+        </nav>
+        {/* {photoUrl && (
+          <img src={photoUrl} className={classes.avatar} alt="profile" />
+        )} */}
       </div>
     );
   }

@@ -5,6 +5,7 @@ import api from "./api/api";
 import Auth from "./views/Auth/Auth";
 import SignUp from "./views/SignUp/SignUp";
 import Dashboard from "./views/Dashboard/Dashboard";
+import Prompts from "./views/Prompts/Prompts";
 import Sidebar from "./components/Layout/Sidebar/Sidebar";
 import MobileBar from "./components/Layout/MobileBar/MobileBar";
 import { connect } from "react-redux";
@@ -51,6 +52,7 @@ class App extends Component {
           <Router>
             <Switch>
               <Route path="/" exact component={Dashboard} />
+              <Route path="/prompts" component={Prompts} />
             </Switch>
           </Router>
         </div>
