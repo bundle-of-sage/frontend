@@ -23,7 +23,7 @@ class Auth extends Component {
     return (
       <div className={classes.authContainer}>
         <form>
-          <h1>Sign In</h1>
+          <h1>Bundle of Sage</h1>
           <input
             type="text"
             placeholder="Email"
