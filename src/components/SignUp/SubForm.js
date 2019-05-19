@@ -20,8 +20,10 @@ class SubForm extends Component {
       await this.setState({ loading: false, success: true });
     } catch (error) {
       //On error, show error UI
-      this.setState({ error: true });
-      console.log("Error: ", error);
+      const errorMessage =
+        error.response.data.errorMessage ||
+        "We are having trouble processing your payment. Please try again.";
+      this.setState({ loading: false, error: true, errorMessage });
     }
   };
 
