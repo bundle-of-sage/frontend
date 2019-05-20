@@ -1,24 +1,34 @@
 import React, { Component } from "react";
 import classes from "./MobileBar.module.scss";
+import { withRouter } from "react-router-dom";
 import Sidebar from "./Sidebar/Sidebar";
 
-export default class MobileBar extends Component {
+class MobileBar extends Component {
   state = { visible: false };
   mobileBarRef = React.createRef();
   componentDidMount() {
     this.mobileBarRef.current.addEventListener("click", e => {
       //If click occurs on shadow, toggle sidebar closed
       const { className } = e.target;
-      if (className.includes("shadow")) {
+      if (className.includes("shadow") || className.includes("container")) {
         this.setState({ visible: false });
       }
     });
   }
+
+  componentDidUpdate(prevProps) {
+    //User clicks on different route, hide sidebar
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.setState({ visible: false });
+    }
+  }
+
   toggleSidebar = () => {
     this.setState(state => {
       return { visible: !state.visible };
     });
   };
+
   render() {
     const { visible } = this.state;
     return (
@@ -32,3 +42,4 @@ export default class MobileBar extends Component {
     );
   }
 }
+export default withRouter(MobileBar);
