@@ -46,16 +46,16 @@ class App extends Component {
     if (checkingAuth) return null;
     else if (isAuthorized && activeMembership) {
       return (
-        <div className={classes.appContainer}>
-          <Sidebar />
-          <MobileBar />
-          <Router>
+        <Router>
+          <div className={classes.appContainer}>
+            <Sidebar />
+            <MobileBar />
             <Switch>
               <Route path="/" exact component={Dashboard} />
               <Route path="/prompts" component={Prompts} />
             </Switch>
-          </Router>
-        </div>
+          </div>
+        </Router>
       );
     } else {
       return (
