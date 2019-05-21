@@ -5,16 +5,28 @@ a {
   width: 100%;
 }
 
+.mainDescription {
+  padding: 0px 15px;
+  line-height: 200%;
+  margin-top: -20px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #282828;
+}
+
 .container {
-  height: 100vh;
+  height: calc(100vh - 50px);
   width: 100%;
   background: #f3f3f3;
   display: flex;
   align-items: center;
   flex-direction: column;
   h1 {
-    margin: 50px 0px;
-    font-size: 28px;
+    margin: 40px 0px;
+    font-size: 22px;
+    color: $dark-orange;
+    text-transform: uppercase;
+    letter-spacing: 5px;
   }
 }
 
@@ -27,12 +39,35 @@ a {
 }
 
 .category {
-  width: 100%;
+  width: 80%;
   height: 15vh;
+  margin: 15px auto;
   display: flex;
   align-items: center;
+  background-blend-mode: color-burn;
   justify-content: center;
   cursor: pointer;
+  border-radius: 5px;
+  h1 {
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+  }
+}
+[data-color="dark-orange"] {
+  background: $dark-orange;
+  background-image: url("../../assets/images/pap.png");
+}
+
+[data-color="light-orange"] {
+  background: $light-orange;
+  background-image: url("../../assets/images/pap.png");
+}
+
+[data-color="apricot"] {
+  background: $apricot;
+  background-image: url("../../assets/images/pap.png");
 }
 
 .promptCard {
