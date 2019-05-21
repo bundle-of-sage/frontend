@@ -4,9 +4,10 @@
   background: black;
   opacity: 0.5;
   position: absolute;
+  top: 0;
   width: 100vw;
   height: 100vh;
-  animation: fadeIn 400ms ease-in-out;
+  animation: fadeIn 150ms ease-in-out;
   z-index: 2;
 }
 
@@ -22,6 +23,7 @@
   flex-direction: column;
   align-items: center;
   padding: 10px;
+  box-sizing: border-box;
 }
 
 @keyframes slideIn {
