@@ -21,6 +21,7 @@ a {
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding: 0vw 15vw;
   h1 {
     margin: 40px 0px;
     font-size: 22px;
@@ -30,6 +31,7 @@ a {
   }
   @media only screen and (max-width: 600px) {
     height: calc(100vh - 50px);
+    padding: 0;
   }
 }
 
@@ -42,7 +44,7 @@ a {
 }
 
 .category {
-  width: 80%;
+  width: 30%;
   height: 15vh;
   margin: 15px auto;
   display: flex;
@@ -56,6 +58,9 @@ a {
     text-transform: uppercase;
     letter-spacing: 2px;
     font-size: 12px;
+  }
+  @media only screen and (max-width: 600px) {
+    width: 80%;
   }
 }
 [data-color="dark-orange"] {
@@ -84,7 +89,9 @@ a {
 .promptHeader {
   width: 100%;
   height: 50px;
+  background-blend-mode: color-burn;
   background: $dark-orange;
+  background-image: url("../../assets/images/pap.png");
   color: white;
   display: flex;
   align-items: center;
