@@ -64,7 +64,13 @@ class App extends Component {
             {isAuthorized ? (
               <Route path="/" exact component={SignUp} />
             ) : (
-              <Route path="/" exact component={Auth} />
+              <>
+                <Route path="/" exact component={Auth} />
+                <Route
+                  path="/signup"
+                  render={() => <Auth isRegistering={true} />}
+                />
+              </>
             )}
           </Switch>
         </Router>

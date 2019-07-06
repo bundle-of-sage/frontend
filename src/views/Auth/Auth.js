@@ -49,8 +49,11 @@ class Auth extends Component {
   };
 
   emailSignUp = async event => {
+    event.preventDefault();
     try {
-      event.preventDefault();
+      if (this.state.password !== this.state.verifyPassword) {
+        return this.handleShowError("Passwords do not match.");
+      }
       const { user } = await createEmailUserProvider(
         this.state.email,
         this.state.password
@@ -70,6 +73,7 @@ class Auth extends Component {
   }
 
   render() {
+    const { isRegistering } = this.props;
     return (
       <div className={classes.authContainer}>
         <form>
@@ -85,7 +89,7 @@ class Auth extends Component {
             onChange={e => this.setState({ password: e.target.value })}
           />
 
-          {false && (
+          {isRegistering && (
             <input
               type="password"
               placeholder="Verify Password"
@@ -101,10 +105,12 @@ class Auth extends Component {
             </p>
           )}
 
-          <button onClick={this.emailLogin}>Sign In</button>
+          <button onClick={isRegistering ? this.emailSignUp : this.emailLogin}>
+            {isRegistering ? "Sign Up" : "Sign In"}
+          </button>
           <button onClick={this.googleLogin}>
             <i className="fab fa-google" />
-            Sign In with Google
+            {isRegistering ? "Sign Up with Google" : "Sign In with Google"}
           </button>
         </form>
       </div>
