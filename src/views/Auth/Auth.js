@@ -14,7 +14,9 @@ class Auth extends Component {
     email: "",
     password: "",
     verifyPassword: "",
-    loading: false
+    loading: false,
+    error: false,
+    errorMessage: ""
   };
 
   googleLogin = async event => {
@@ -25,9 +27,9 @@ class Auth extends Component {
   };
 
   emailLogin = async event => {
+    event.preventDefault();
     console.log("Email Logging In...");
     try {
-      event.preventDefault();
       const { user } = await signInEmailUserProvider(
         this.state.email,
         this.state.password
@@ -36,8 +38,12 @@ class Auth extends Component {
       await this.props.login({ displayName, email, photoURL, uid });
     } catch (error) {
       const errorCode = error.code;
-      if (errorCode === "auth/email-already-in-use") {
-        console.log("Email already in use");
+      if (errorCode === "auth/user-not-found") {
+        this.handleShowError(
+          "No user found. Please try a differrent email or sign up!"
+        );
+      } else if (errorCode === "auth/wrong-password") {
+        this.handleShowError("Wrong password.");
       }
     }
   };
@@ -58,6 +64,10 @@ class Auth extends Component {
       }
     }
   };
+
+  handleShowError(errorMessage = "An unexpected error occurred.") {
+    this.setState({ error: true, errorMessage });
+  }
 
   render() {
     return (
@@ -82,6 +92,13 @@ class Auth extends Component {
               className={classes.bottomInput}
               onChange={e => this.setState({ verifyPassword: e.target.value })}
             />
+          )}
+
+          {this.state.error && (
+            <p className={classes.errorMessage}>
+              <i className="fas fa-exclamation-circle" />
+              {this.state.errorMessage || "An unexpected error occurred."}
+            </p>
           )}
 
           <button onClick={this.emailLogin}>Sign In</button>

@@ -50,3 +50,19 @@ div.authContainer {
 .bottomInput {
   margin-bottom: 25px;
 }
+
+.errorMessage {
+  color: $dark-orange;
+  text-align: center;
+  padding-bottom: 20px;
+  animation: fadeIn 200ms ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
