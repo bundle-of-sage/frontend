@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import classes from "./Auth.module.scss";
-import { auth, googleProvider } from "../../firebase/auth";
+import {
+  auth,
+  googleProvider,
+  createEmailUserProvider,
+  signInEmailUserProvider
+} from "../../firebase/auth";
 import { connect } from "react-redux";
 import { login } from "../../store/actions/userActions";
 
@@ -19,6 +24,41 @@ class Auth extends Component {
     await this.props.login({ displayName, email, photoURL, uid });
   };
 
+  emailLogin = async event => {
+    console.log("Email Logging In...");
+    try {
+      event.preventDefault();
+      const { user } = await signInEmailUserProvider(
+        this.state.email,
+        this.state.password
+      );
+      const { displayName, email, photoURL, uid } = user;
+      await this.props.login({ displayName, email, photoURL, uid });
+    } catch (error) {
+      const errorCode = error.code;
+      if (errorCode === "auth/email-already-in-use") {
+        console.log("Email already in use");
+      }
+    }
+  };
+
+  emailSignUp = async event => {
+    try {
+      event.preventDefault();
+      const { user } = await createEmailUserProvider(
+        this.state.email,
+        this.state.password
+      );
+      const { displayName, email, photoURL, uid } = user;
+      await this.props.login({ displayName, email, photoURL, uid });
+    } catch (error) {
+      const errorCode = error.code;
+      if (errorCode === "auth/email-already-in-use") {
+        this.emailLogin();
+      }
+    }
+  };
+
   render() {
     return (
       <div className={classes.authContainer}>
@@ -34,6 +74,7 @@ class Auth extends Component {
             placeholder="Password"
             onChange={e => this.setState({ password: e.target.value })}
           />
+
           {false && (
             <input
               type="password"
@@ -42,6 +83,7 @@ class Auth extends Component {
               onChange={e => this.setState({ verifyPassword: e.target.value })}
             />
           )}
+
           <button onClick={this.emailLogin}>Sign In</button>
           <button onClick={this.googleLogin}>
             <i className="fab fa-google" />
