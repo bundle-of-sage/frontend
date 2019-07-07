@@ -21,14 +21,17 @@ class Auth extends Component {
 
   googleLogin = async event => {
     event.preventDefault();
-    const { user } = await auth.signInWithPopup(googleProvider);
-    const { displayName, email, photoURL, uid } = user;
-    await this.props.login({ displayName, email, photoURL, uid });
+    try {
+      const { user } = await auth.signInWithPopup(googleProvider);
+      const { displayName, email, photoURL, uid } = user;
+      await this.props.login({ displayName, email, photoURL, uid });
+    } catch (error) {
+      this.handleShowError("Something went wrong. Try again.");
+    }
   };
 
   emailLogin = async event => {
-    event.preventDefault();
-    console.log("Email Logging In...");
+    event && event.preventDefault();
     try {
       const { user } = await signInEmailUserProvider(
         this.state.email,
@@ -40,7 +43,7 @@ class Auth extends Component {
       const errorCode = error.code;
       if (errorCode === "auth/user-not-found") {
         this.handleShowError(
-          "No user found. Please try a differrent email or sign up!"
+          "No account found. Please try a differrent email or sign up!"
         );
       } else if (errorCode === "auth/wrong-password") {
         this.handleShowError("Wrong password.");
