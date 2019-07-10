@@ -9,8 +9,30 @@ import {
 import { connect } from "react-redux";
 import { login } from "../../store/actions/userActions";
 
-class Auth extends Component {
-  state = {
+interface IProps {
+  isRegistering: boolean;
+  login: (user: User) => void;
+}
+
+interface IState {
+  email: string;
+  password: string;
+  verifyPassword: string;
+  loading: boolean;
+  error: boolean;
+  errorMessage: string;
+}
+
+interface User {
+  displayName: string | null;
+  email: string;
+  photoURL: string | null;
+  uid: string;
+  [x: string]: any;
+}
+
+class Auth extends Component<IProps, IState> {
+  state: IState = {
     email: "",
     password: "",
     verifyPassword: "",
@@ -19,21 +41,30 @@ class Auth extends Component {
     errorMessage: ""
   };
 
-  googleLogin = async event => {
+  googleLogin = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ): Promise<void> => {
     event.preventDefault();
     try {
-      const { user } = await auth.signInWithPopup(googleProvider);
+      const { user }: { user: any } = await auth.signInWithPopup(
+        googleProvider
+      );
       const { displayName, email, photoURL, uid } = user;
-      await this.props.login({ displayName, email, photoURL, uid });
+
+      if (typeof this.props.login === "function") {
+        await this.props.login({ displayName, email, photoURL, uid });
+      } else this.handleShowError("Something went wrong. Try again.");
     } catch (error) {
       this.handleShowError("Something went wrong. Try again.");
     }
   };
 
-  emailLogin = async event => {
+  emailLogin = async (
+    event?: React.MouseEvent<HTMLButtonElement>
+  ): Promise<void> => {
     event && event.preventDefault();
     try {
-      const { user } = await signInEmailUserProvider(
+      const { user }: { user: User } = await signInEmailUserProvider(
         this.state.email,
         this.state.password
       );
@@ -51,13 +82,15 @@ class Auth extends Component {
     }
   };
 
-  emailSignUp = async event => {
+  emailSignUp = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ): Promise<void> => {
     event.preventDefault();
     try {
       if (this.state.password !== this.state.verifyPassword) {
         return this.handleShowError("Passwords do not match.");
       }
-      const { user } = await createEmailUserProvider(
+      const { user }: { user: User } = await createEmailUserProvider(
         this.state.email,
         this.state.password
       );
@@ -71,7 +104,9 @@ class Auth extends Component {
     }
   };
 
-  handleShowError(errorMessage = "An unexpected error occurred.") {
+  handleShowError(
+    errorMessage: string = "An unexpected error occurred."
+  ): void {
     this.setState({ error: true, errorMessage });
   }
 
@@ -121,7 +156,15 @@ class Auth extends Component {
   }
 }
 
-export default connect(
+interface IActionProps {
+  login: object;
+}
+
+const dispatchProps: IActionProps = {
+  login: login
+};
+
+export default connect<void>(
   null,
-  { login }
+  dispatchProps
 )(Auth);
